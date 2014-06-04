@@ -1,0 +1,104 @@
+﻿@model DoctorAppointment.Models.SignUpModel
+@{
+    ViewBag.Title = "MySignUp Form";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <table width="90%" align="center" border="1" cellpadding="1" cellspacing="1">
+            <tr>
+                <td align="center">
+                    <div class="form-horizontal">
+
+                        <h4>Aortic Solutions SignUp Form</h4>
+                        <hr />
+
+                        <table width="90%" align="center" border="1" cellpadding="1" cellspacing="1">
+                            <tbody>
+                                <tr>
+                                    @Html.ValidationSummary(true)
+
+                                    <td>@Html.LabelFor(model => model.PatientFirstName)</td>
+
+                                    <td>@Html.EditorFor(model => model.PatientFirstName)</td>
+                                    @Html.ValidationMessageFor(model => model.PatientFirstName)
+                                </tr>
+                               
+
+
+                                <tr>
+                                        <td>@Html.LabelFor(model =>model.PatientLastName)</td>
+
+                                        <td>@Html.EditorFor(model => model.PatientLastName)</td>
+                                        @Html.ValidationMessageFor(model => model.PatientLastName)
+
+                               
+                                </tr>
+                                    
+                               
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.ssn)</td>
+
+                                    <td>@Html.EditorFor(model => model.ssn)</td>
+                                    @Html.ValidationMessageFor(model => model.ssn)
+                              
+                            </tr>
+                                    
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.UserName)</td>
+
+                                    <td>@Html.EditorFor(model => model.UserName)</td>
+                                    @Html.ValidationMessageFor(model => model.UserName)
+                                </tr> 
+
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Password)</td>
+                               
+                                    <td>@Html.EditorFor(model => model.Password)</td>
+                                    @Html.ValidationMessageFor(model => model.Password)
+
+                            </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.ConfirmPassword)</td>
+
+                                    <td>@Html.EditorFor(model => model.ConfirmPassword)</td>
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.primaryinsurance)</td>
+                               
+                                    <td>@Html.EditorFor(model => model.primaryinsurance)</td>
+                                    @Html.ValidationMessageFor(model => model.primaryinsurance)
+
+                            </tr>
+                                    
+                                 
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.phoneNo)</td>
+                               
+                                    <td>@Html.EditorFor(model => model.phoneNo)</td>
+                                    @Html.ValidationMessageFor(model => model.phoneNo)
+
+                            </tr> 
+                               
+                                  
+                                 
+                                <tr>
+                                    <td><input type="submit" value="SignUp" name="Command" style="background: #a41b2b; font-size: 14px; color: White; height:30px; width: 100px;" /></td>
+                                    
+                                    <td><input type="submit" value="Cancel" name="Command" style="background: #a41b2b; font-size: 14px; color: White; height:30px; width: 100px;" /></td>
+
+                                </tr>
+                                    
+                                
+                            </tbody>
+                            </table>
+</div>
+    </div>
+        
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

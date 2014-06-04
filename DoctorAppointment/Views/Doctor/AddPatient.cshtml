@@ -1,0 +1,302 @@
+﻿@model DoctorAppointment.Models.DoctorModel
+
+@{
+    ViewBag.Title = "AddPatient";
+}
+
+<h2>AddPatient</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <table width=" 90%" align="center" >
+        <tr>
+            <td>
+            <div>
+                @Html.ValidationSummary(true)
+                <input type="button" value="Logout" onclick="@("window.location.href='" + @Url.Action("LogOut", "DLogin") + "'");" style="background: #a41b2b; font-size: 14px;
+                            color: White;" />
+                <div class="form-group">
+                    <div style="background: #a41b2b; font-size: 14px;
+                            color: White;">
+                        <b>Patient Visit Details</b>
+                    </div>
+                   
+
+                   
+                    
+                    <div>
+                        @if(Model != null && !string.IsNullOrEmpty(Model.MessageString))
+                        { 
+                        <table width="100%">
+                            <tr>
+                                <td>@Model.MessageString </td>
+
+                            </tr>
+
+                        </table>
+                        }
+                       
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"> Patient Name:</td>
+                                <td width="25%">
+                                    @Html.EditorFor(m => m.ssn)
+                                    @Html.ValidationMessageFor(m => m.PatientName, "Please enter Patient Name", new { @class = "errorMessage" })
+                                </td>
+                               
+                                <td width="25%"></td>
+                                <td width="25%"></td>
+
+                            </tr>
+
+                            <tr>
+                                <td width="25%"> SSN</td>
+                                <td width="25%">
+                                    @Html.EditorFor(m => m.ssn)
+                                    @Html.ValidationMessageFor(m => m.ssn, "Please enter SSN", new { @class = "errorMessage" })
+                                </td>
+                                <td width="25%"> Visit Date</td>
+                                <td width="25%"> @Html.EditorFor(m => m.Visitdate)   </td>
+
+                            </tr>
+
+                            <tr>
+                                <td width="25%">  Visit Type:</td>
+                                <td width="25%">
+
+                                    @Html.DropDownListFor(m => m.visittype, new SelectList(
+                                new List<object>{
+                                    new { value = "Not Specified" , text = "Not Specified" },
+                                    new { value = "Initial MD Visit" , text = "Initial MD Visit" },
+                                }, "value", "text", 0), new { @class = "list-textbox" })
+                                </td>
+                                <td width="25%"> Visit Location</td>
+                                <td width="25%">
+                                    @Html.DropDownListFor(m => m.visitlocation, new SelectList(
+                                new List<object>{
+                                    new { value = "Aortic Hospital" , text = "Aortic Hospital" },
+                                    new { value = "Emory Hospital" , text = "Emory Hospital" },
+                                }, "value", "text", 0), new { @class = "list-textbox" })
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td width="25%"> Primary Insurance</td>
+                                <td width="25%">
+                                    @Html.DropDownListFor(m => m.primaryinsurance, new SelectList(
+                                new List<object>{
+                                    new { value = "Aetina" , text = "Aetina" },
+                                    new { value = "Signa" , text = "Signa" },
+                                }, "value", "text", 0), new { @class = "list-textbox" })
+                                </td>
+                                <td width="25%"> Select Ref MD</td>
+                                <td width="25%">
+                                    @Html.DropDownListFor(m => m.referredby, new SelectList(
+                                new List<object>{
+                                    new { value = "Manning, William" , text = "Manning, William" },
+                                    new { value = "Sieller, Richard" , text = "Sieller, Richard" },
+                                }, "value", "text", 0), new { @class = "list-textbox" })
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td width="25%"> Height(inches)</td>
+                                <td width="25%">
+                                    @Html.EditorFor(m => m.Height)
+
+                                </td>
+                                <td width="25%">Weight(lbs)</td>
+                                <td width="25%"> @Html.EditorFor(m => m.Weight)   </td>
+
+                            </tr>
+                        </table>
+
+
+                    </div>
+                    <div>
+                        <table width="100%">
+                            <tr style="background: #a41b2b; font-size: 14px;
+                            color: White;">
+
+                                <td colspan="4" class="h4"><b> Medications</b></td>
+                            </tr>
+
+
+                        </table>
+
+
+                    </div>
+                    <div>
+                        <table width="100%">
+                            <tr style="background: #a41b2b; font-size: 14px;
+                            color: White;">
+
+                                <td colspan="4"><b> Medical History </b><a><img src="~/Images/downarrow.jpg" id="imgMH"/></a></td>
+                            </tr>
+                        </table>
+                        <div id="mhdiv">
+                            <table>
+                                <tr>
+                                    <td width="25%">@Html.EditorFor(m => m.MedicalHistoryList[0])    Adrenal Lesion</td>
+                                    <td width="25%">
+                                        @Html.EditorFor(m => m.MedicalHistoryList[1])  Cardiac Transplant
+                                    </td>
+                                    <td width="25%"> @Html.EditorFor(m => m.MedicalHistoryList[2]) Hypoplastic Left Heart</td>
+                                    <td width="25%"> @Html.EditorFor(m => m.MedicalHistoryList[3]) Pulmonary Edema   </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td width="25%"> @Html.EditorFor(m => m.MedicalHistoryList[4])   Advancec Liver Disease</td>
+                                    <td width="25%">
+                                        @Html.EditorFor(m => m.MedicalHistoryList[5])
+                                        Cardiac Tumar
+                                    </td>
+                                    <td width="25%"></td>
+                                    <td width="25%">   </td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                    <div>
+                        <table width="100%">
+                            <tr style="background: #a41b2b; font-size: 14px;
+                            color: White;">
+
+                                <td colspan="4" class="h4"><b>  Risk Factors</b></td>
+                            </tr>
+                            <tr>
+                                <td width="25%">@Html.EditorFor(m => m.RiskFactorList[0])   Cardiac Disease</td>
+                                <td width="25%">
+                                    @Html.EditorFor(m => m.RiskFactorList[1]) Diapetes Mellitus - None
+                                </td>
+                                <td width="25%"> @Html.EditorFor(m => m.RiskFactorList[2]) Hypertension(3)</td>
+                                <td width="25%"> @Html.EditorFor(m => m.RiskFactorList[3]) Renal Status(3a)   </td>
+
+                            </tr>
+
+                            <tr>
+                                <td width="25%"> @Html.EditorFor(m => m.RiskFactorList[4])   Cardiac Disease(0) - None</td>
+                                <td width="25%">
+                                    @Html.EditorFor(m => m.RiskFactorList[5])
+                                    Diapetes Mellitus (1a)
+                                </td>
+                                <td width="25%"></td>
+                                <td width="25%">   </td>
+
+                            </tr>
+
+                        </table>
+
+
+                    </div>
+                    <div>
+                        <table width="100%">
+                            <tr style="background: #a41b2b; font-size: 14px;
+                            color: White;">
+
+                                <td colspan="4" class="h4"><b> Incidental Findings</b> </td>
+                            </tr>
+                            <tr>
+                                <td width="25%">@Html.EditorFor(m => m.IncidentalFindingsList[0])   Anamolous cardivacular Anatomy  </td>
+                                <td width="25%">
+                                    @Html.EditorFor(m => m.IncidentalFindingsList[1]) Emphysema
+                                </td>
+                                <td width="25%"> @Html.EditorFor(m => m.IncidentalFindingsList[2]) Lymph node enlargement</td>
+                                <td width="25%"> @Html.EditorFor(m => m.IncidentalFindingsList[3]) Pulmonary Embolism   </td>
+
+                            </tr>
+
+                            <tr>
+                                <td width="25%"> @Html.EditorFor(m => m.IncidentalFindingsList[4])   Aortic Aneurysm-Incidental Finding</td>
+                                <td width="25%">
+                                    @Html.EditorFor(m => m.IncidentalFindingsList[5])
+                                    Lung Mass
+                                </td>
+                                <td width="25%"></td>
+                                <td width="25%">   </td>
+
+                            </tr>
+
+                        </table>
+
+
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td width="25%"> The visit require a follow up visit:</td>
+                                <td width="25%">
+                                    @Html.DropDownListFor(m => m.visitrequired, new SelectList(
+                                new List<object>{
+                                    new { value = "1" , text = "Yes" },
+                                    new { value = "0" , text = "No" },
+                                }, "value", "text", 0), new { @class = "list-textbox" })
+                                </td>
+
+
+                                <td width="25%"></td>
+                                <td width="25%"> </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                    <div class="form-group">
+                        @Html.ValueFor(model => model.MessageString)
+                    </div>
+                    <div>
+                        <table width="100% ">
+                            <tr>
+                                
+                                <td width="100%" colspan="4">
+                                    <input type="submit"  value="Save" name="Command" style="background: #a41b2b; font-size: 14px;
+                            color: White;" />
+                                    <input type="submit" value="Save and go to Add Aneurysm" name="Command" style="background: #a41b2b; font-size: 14px;
+                            color: White;" />
+                                    <input type="submit" value="Save and go to Add Surgery" name="Command" style="background: #a41b2b; font-size: 14px;
+                            color: White;" />
+                                    <input type="submit" value="Cancel" name="Command" style="background: #a41b2b; font-size: 14px;
+                            color: White;" />
+                                </td>
+                               
+                            </tr>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </tr>
+</table> 
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#mhdiv').show();
+
+    });
+
+    $("#imgMH").click(function () {
+     
+        $('#mhdiv').toggle();
+        
+    });
+    </script>
+}
